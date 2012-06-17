@@ -1,0 +1,41 @@
+#---------------------------
+# Modification for https://github.com/MaStr/PirateBoxScripts_Webserver
+#                  https://github.com/MaStr/mkPirateBox
+#
+#  by Matthias Strubel     matthias.strubel@aod-rpg.de
+#     17-06-2012         licenced GPL-3
+#---------------------------
+
+PirateChest is an example modification project for PirateBox.
+It show how to create your own piratebox_ws_img.tar.gz file.
+
+The concept of the PirateChest is more like a traditional Chest the old pirates covered on a lonely island. After you found it, you want to open it. The (wifi) PirateChest opens for downloading its content after enough data from other users was uploaded.
+
+Is this upload quote arrived, the www folders get exchanged and you see a new flash page and gets the link to the download link.
+
+======> It's not completly finished yet <=======
+
+
+-----------------------
+You are allowed to fork this project and make your own stuff with it. You can simply copy it over new repositories.
+The main stuff is located on the Makefile.
+
+You can overwrite Variables in mod/data/hook_custom.conf 
+   or simply have a look in Makefile there is point which shows how you can exchane config-file
+
+After you run 
+   # make 
+
+You recieve a new piratebox_ws_img.tar.gz which contains your stuff.
+Put this file on your USB-DEVICE .
+
+If you have a already installed piratebox, run
+   # /etc/init.d/piratebox stop
+   # /etc/init.d/piratebox updatePB
+This takes your new Image in place and with 
+   # /etc/init.d/piratebox start
+it comes in action with initialization..
+
+If you want to install a new piratebox, place the piratebox_ws_img.tar.gz to the USB Stick before starting the install. This will cause the piratebox install to take the file on your usb stick instead of downloading the not modded one.
+
+

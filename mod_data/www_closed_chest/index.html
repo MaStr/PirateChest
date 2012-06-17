@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<title>You found a closed Chest!</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('div#upload_status').ajaxError(function() {
+                 $(this).text( "Triggered ajaxError handler." );
+               });
+        $('div#shoutbox').ajaxError(function() {
+                 $(this).text( "Triggered ajaxError handler on shoutbox" );
+               });
+          // do stuff when DOM is ready
+
+    $("#sb_form").submit(function(event) {
+
+    /* stop form from submitting normally */
+    event.preventDefault();
+
+    post_shoutbox();
+
+    });
+
+	  display_upload();
+	  display_shoutbox();
+   });
+
+  function refresh_upload () {
+          $.get('/upload_left.txt', function(data) {
+                       $('div#upload_status').html(data);
+                   } );
+  }
+
+
+  function refresh_shoutbox () {
+          $.get('/cgi-bin/psoread.py', function(data) {
+                       $('div#shoutbox').html(data);
+                   } );
+  }
+  function refresh_time_sb () {
+     // Refresh rate in milli seconds
+     mytime=setTimeout('display_shoutbox()', 10000);
+
+  }
+
+  function refresh_timer () {
+     // Refresh rate in milli seconds
+     mytime=setTimeout('display_upload()', 60000);
+
+  }
+
+  function fnGetDomain(url) {
+     return url.match(/:\/\/(.[^/]+)/)[1];
+  }
+
+  function display_upload() {
+     refresh_upload();
+     refresh_timer();
+  }
+
+  function display_shoutbox() {
+     refresh_shoutbox();
+     refresh_time_sb();
+  }
+
+  function post_shoutbox () {
+     $.post("/cgi-bin/psowrte.py" , $("#sb_form").serialize())
+           .success(function() { refresh_shoutbox(); });
+     $('#sb_form_text').val("");
+  }
+
+
+</script>
+<link rel="stylesheet" type="text/css" href="piratechest.css">
+<LINK rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+
+</head>
+<body >
+
+<div class="central_top">
+  <h2>Congratulation!<br/>
+You found a hidden chest!</h2>
+  <img src="chest.jpg" alt="_chest Picuture" title="Congratulations! You found a chest!" />
+</div>
+<div class="central">
+Do you want to know what is in there?<br /> Then you need to upload some files to unlock the tiny Box!!<br />
+<br />
+<iframe allowtransparency="true" scrolling="no"  height='55px' width='400' frameBorder='0' src='http://piratebox.lan:8080'>Your browser does not supprt Iframes.. If you want to upload something, follow this <a href='http://piratebox.lan:8080'>Link</a></iframe>
+</div>
+<div id="upload_status" class="central" title="This Counter refreshes every two Minutes"></div>
+
+<div class="central"><br /> Do you have some considerations about its content? Share it with your friends on the <a href="/board/">forum</a>.
+or leave a message on the wall</div>
+<div class="central">
+<br />
+<form method="POST" name="psowrte" id="sb_form" >
+Name:<input type="text" value="anonymous" name="name" size="10">&nbsp;&nbsp; Message:<input type="text" name="data" size="20" id='sb_form_text' >&nbsp;&nbsp;
+<input type="submit" value="Write it down" name="submit"  /><br>
+<input type="hidden" value="blue" name="color" /> </form>
+</div>
+
+<div class="shoutbox_content" id="shoutbox"></div>
+
+
+
+<div class="footer">
+Do you want more information about the PirateChest? <a href="readme.html" title="More information" >Read me</a>
+</div>
+</body>
+</html>
