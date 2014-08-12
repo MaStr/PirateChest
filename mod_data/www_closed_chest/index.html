@@ -28,15 +28,15 @@
 
   function refresh_upload () {
           $.get('/upload_left.txt', function(data) {
-                       $('div#upload_status').html(data);
+                       $('pre#upload_status').html(data);
                    } );
   }
 
 
   function refresh_shoutbox () {
-          $.get('/cgi-bin/psoread.py', function(data) {
-                       $('div#shoutbox').html(data);
-                   } );
+         $.get('/cgi-bin/psoread.py', function(data) {
+                      $('div#shoutbox').html(data);
+                  } );
   }
   function refresh_time_sb () {
      // Refresh rate in milli seconds
@@ -46,7 +46,7 @@
 
   function refresh_timer () {
      // Refresh rate in milli seconds
-     mytime=setTimeout('display_upload()', 60000);
+     mytime=setTimeout('display_upload()', 10000);
 
   }
 
@@ -89,7 +89,7 @@ Do you want to know what is in there?<br /> Then you need to upload some files t
 <br />
 <iframe allowtransparency="true" scrolling="no"  height='55px' width='400' frameBorder='0' src='http://piratebox.lan:8080'>Your browser does not supprt Iframes.. If you want to upload something, follow this <a href='http://piratebox.lan:8080'>Link</a></iframe>
 </div>
-<div id="upload_status" class="central" title="This Counter refreshes every two Minutes"></div>
+<div class="central" title="This Counter refreshes every two Minutes"><font size='+5'><pre id="upload_status"></pre></font></div>
 
 <div class="central"><br /> Do you have some considerations about its content? Share it with your friends on the <a href="/board/">forum</a>.
 or leave a message on the wall</div>

@@ -37,7 +37,7 @@ generate_star_line(){
 		IT=$(( $IT + 1 ))
 	done;
 
-	echo '|'
+	echo '|' $((  $STARS * 100 / $WISHED_MAX_STARS )) "%"
 }
 
 
