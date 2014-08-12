@@ -1,4 +1,4 @@
-
+#!/bin/sh
 . /opt/piratebox/conf/piratebox.conf
 
 get_current_usage(){
